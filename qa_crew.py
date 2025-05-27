@@ -25,18 +25,18 @@ def setup_ai_model():
         os.environ['OPENAI_MODEL_NAME'] = ollama_model
         os.environ['OPENAI_API_KEY'] = 'ollama'  # Dummy key for Ollama
         
-        print(f"✅ Ollama configured: {ollama_model} at {ollama_base_url}")
+        print(f"Ollama configured: {ollama_model} at {ollama_base_url}")
         return ollama_model
     else:
         # Configure OpenAI
         try:
             openai_api_key = config('OPENAI_API_KEY')
             os.environ['OPENAI_API_KEY'] = openai_api_key
-            print("✅ OpenAI API Key loaded successfully")
+            print("OpenAI API Key loaded successfully")
             return 'gpt-4-turbo-preview'
         except Exception as e:
-            print(f"⚠️ Warning: Could not load OPENAI_API_KEY from .env file: {e}")
-            print("💡 Tip: Set USE_OLLAMA=true in .env to use local Ollama instead")
+            print(f"Warning: Could not load OPENAI_API_KEY from .env file: {e}")
+            print("Tip: Set USE_OLLAMA=true in .env to use local Ollama instead")
             return None
 
 # Setup AI model
@@ -54,9 +54,9 @@ class QACrew:
         
         # CS Professor - Architecture and Complexity Analysis
         cs_professor = Agent(
-            role="Expert Computer Science Professor and Software Architecture Analyst",
-            goal="Conduct comprehensive architectural and algorithmic analysis of codebases to identify design patterns, architectural flaws, algorithmic inefficiencies, and provide academic-level insights on code structure and computational complexity.",
-            backstory="You are a distinguished Computer Science Professor with 20+ years of experience in software engineering, algorithms, and system design. You have published numerous papers on software architecture and have mentored thousands of students. Your expertise spans multiple programming paradigms, design patterns, and computational theory. You approach code analysis with both theoretical rigor and practical wisdom, identifying not just what's wrong but explaining the underlying computer science principles that should guide better solutions.",
+            role="Software Architecture Analyst",
+            goal="Analyze code structure, design patterns, and algorithmic complexity to identify architectural issues and improvement opportunities.",
+            backstory="Experienced software architect with expertise in design patterns, code organization, and system design. Focuses on maintainability, scalability, and code quality from an architectural perspective.",
             tools=[qa_crewai_tools.analyze_code_structure, qa_crewai_tools.analyze_code_complexity, qa_crewai_tools.check_best_practices],
             verbose=True,
             allow_delegation=False
@@ -64,9 +64,9 @@ class QACrew:
         
         # Tech Stack Expert - Language-Specific Analysis
         tech_expert = Agent(
-            role="Senior Full-Stack Developer and Technology Specialist",
-            goal="Perform deep technical analysis of Python, React, and SQL code to identify syntax errors, framework-specific issues, performance bottlenecks, and adherence to technology-specific best practices and conventions.",
-            backstory="You are a seasoned full-stack developer with 15+ years of hands-on experience building production applications using Python, React, and SQL databases. You've worked at major tech companies and startups, shipping code that serves millions of users. You know the common pitfalls, performance gotchas, and best practices for each technology stack. Your analysis goes beyond surface-level syntax checking to understand the nuances of how these technologies work together in real-world applications.",
+            role="Technology Stack Specialist",
+            goal="Analyze Python, React, and SQL code for syntax errors, framework-specific issues, and adherence to best practices.",
+            backstory="Full-stack developer with experience in Python, React, and SQL. Specializes in identifying language-specific issues, performance problems, and framework best practices.",
             tools=[qa_crewai_tools.check_python_syntax, qa_crewai_tools.analyze_react_components, qa_crewai_tools.validate_sql_queries, qa_crewai_tools.validate_imports, qa_crewai_tools.check_localhost_site],
             verbose=True,
             allow_delegation=False
@@ -74,9 +74,9 @@ class QACrew:
         
         # Dependencies Expert - Package and Security Analysis
         deps_expert = Agent(
-            role="Package Management and Dependency Security Specialist",
-            goal="Analyze and validate all package dependencies, version compatibility, security vulnerabilities, and dependency management practices to ensure robust, secure, and maintainable software supply chains.",
-            backstory="You are a DevOps and Security Engineer specializing in software supply chain security and dependency management. You've seen countless production incidents caused by dependency issues - from version conflicts to security vulnerabilities in third-party packages. You understand the intricacies of package managers (pip, npm, yarn), semantic versioning, and the importance of keeping dependencies up-to-date while maintaining stability. Your expertise helps teams avoid the common traps of dependency hell and security breaches.",
+            role="Dependency Management Specialist",
+            goal="Analyze package dependencies for version compatibility, security vulnerabilities, and management best practices.",
+            backstory="DevOps engineer specializing in dependency management and supply chain security. Experienced with package managers and identifying dependency-related issues.",
             tools=[qa_crewai_tools.check_package_dependencies, qa_crewai_tools.validate_imports],
             verbose=True,
             allow_delegation=False
@@ -84,9 +84,9 @@ class QACrew:
         
         # Security Expert - Vulnerability Assessment
         security_expert = Agent(
-            role="Cybersecurity Analyst and Application Security Specialist",
-            goal="Conduct thorough security assessments to identify vulnerabilities, security anti-patterns, potential attack vectors, and compliance issues while providing actionable remediation guidance.",
-            backstory="You are a certified cybersecurity professional with extensive experience in application security, penetration testing, and secure code review. You've worked with organizations to secure their applications against OWASP Top 10 vulnerabilities and have experience with security frameworks like NIST and ISO 27001. You think like an attacker while maintaining the mindset of a defender, always looking for ways code could be exploited and how to prevent those attacks. Your analysis covers everything from injection attacks to authentication flaws to data exposure risks.",
+            role="Security Analyst",
+            goal="Identify security vulnerabilities, anti-patterns, and potential attack vectors in code.",
+            backstory="Cybersecurity professional with experience in application security and secure code review. Specializes in OWASP vulnerabilities and security best practices.",
             tools=[qa_crewai_tools.scan_security_vulnerabilities, qa_crewai_tools.check_best_practices],
             verbose=True,
             allow_delegation=False
@@ -94,9 +94,9 @@ class QACrew:
         
         # QA Tester - Comprehensive Quality Assessment
         qa_tester = Agent(
-            role="Senior Quality Assurance Engineer and Test Strategy Lead",
-            goal="Perform comprehensive quality assurance testing including functional testing, code quality assessment, documentation review, and overall system reliability analysis to ensure software meets production readiness standards.",
-            backstory="You are an experienced QA Engineer with 12+ years in software testing across various industries and project types. You've developed testing strategies for everything from small startups to enterprise applications. You understand the full testing pyramid - from unit tests to integration tests to end-to-end testing. Your approach is methodical and thorough, ensuring that software not only works as intended but is maintainable, documented, and ready for production deployment. You're the final gatekeeper who synthesizes all findings into actionable recommendations.",
+            role="Quality Assurance Engineer",
+            goal="Perform comprehensive quality assessment including code quality, documentation review, and testing analysis.",
+            backstory="QA engineer with experience in software testing and quality assurance. Specializes in synthesizing findings and providing actionable recommendations for code improvement.",
             tools=[qa_crewai_tools.run_general_qa_tests, qa_crewai_tools.analyze_code_structure, qa_crewai_tools.check_localhost_site],
             verbose=True,
             allow_delegation=False
@@ -218,12 +218,12 @@ class QACrew:
     def run_analysis(self, code_path: str, project_type: str = "mixed", localhost_port: str = None):
         """Run the complete QA analysis"""
         
-        print("🚀 STARTING QA CREW ANALYSIS")
+        print("STARTING QA CREW ANALYSIS")
         print("=" * 60)
-        print(f"📁 Target: {code_path}")
-        print(f"🏷️ Type: {project_type}")
+        print(f"Target: {code_path}")
+        print(f"Type: {project_type}")
         if localhost_port:
-            print(f"🌐 Localhost: port {localhost_port}")
+            print(f"Localhost: port {localhost_port}")
         print()
         
         # Create tasks
@@ -240,7 +240,7 @@ class QACrew:
         # Execute the crew
         result = crew.kickoff()
         
-        print("\n✅ QA CREW ANALYSIS COMPLETE!")
+        print("\nQA CREW ANALYSIS COMPLETE!")
         print("=" * 60)
         
         return result
@@ -260,7 +260,7 @@ def main():
     qa_crew = QACrew()
     result = qa_crew.run_analysis(args.path, args.type, args.port)
     
-    print("\n📊 FINAL RESULT:")
+    print("\nFINAL RESULT:")
     print(result)
 
 if __name__ == "__main__":
