@@ -45,6 +45,14 @@ OLLAMA_MODEL=codellama:13b
 OLLAMA_BASE_URL=http://localhost:11434
 ```
 
+**Ollama Setup Steps:**
+1. Install Ollama from https://ollama.ai
+2. Pull a model: `ollama pull codellama:13b`
+3. Start service: `ollama serve`
+4. Test: `ollama run codellama:13b "Hello"`
+
+See `OLLAMA_SETUP.md` for detailed setup instructions.
+
 ### Usage
 
 **Quick analysis:**
@@ -126,6 +134,12 @@ OLLAMA_BASE_URL=http://localhost:11434
 | CodeLlama 13B | Medium | Free | Good | Code Analysis |
 | Llama2 13B | Medium | Free | Fair | General QA |
 
+**Ollama Model Recommendations:**
+- **codellama:13b** - Best for code analysis (requires 16GB RAM)
+- **codellama:7b** - Faster option for 8GB RAM systems
+- **llama2:13b** - Good for general QA tasks
+- **mistral:7b** - Lightweight alternative
+
 ## Project Structure
 
 ```
@@ -171,11 +185,44 @@ python qa_crew.py --path ./project --type mixed
 python qa_cli.py --localhost-only --port 3000
 ```
 
+## AI Integration
+
+For Cursor AI integration and automated code validation workflows, see `examples/cursor_integration.md`.
+
 ## Testing
 
 Run the test suite:
 ```bash
 python tests/test_qa_tools.py
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**"ModuleNotFoundError: No module named 'crewai'"**
+```bash
+pip install -r requirements.txt
+```
+
+**"OpenAI API key not found"**
+```bash
+# Check .env file exists and has correct format
+echo "OPENAI_API_KEY=your_key_here" > .env
+```
+
+**"Connection refused" for Ollama**
+```bash
+# Make sure Ollama is running
+ollama serve
+# Check if model is installed
+ollama list
+```
+
+**Analysis fails on large projects**
+```bash
+# Use quick mode for faster analysis
+python qa_cli.py --path ./large-project --quick
 ```
 
 ## Contributing
