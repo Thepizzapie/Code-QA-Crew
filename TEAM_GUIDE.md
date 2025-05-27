@@ -2,10 +2,17 @@
 
 ## 🚀 **Simple Commands for Your Team**
 
+### **AI Model Options:**
+- **OpenAI API** (recommended): Fast, high-quality analysis
+- **Ollama** (free): Local AI, no API costs, private
+- **Setup**: See [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for local AI setup
+
 ### **Basic Usage Pattern:**
 ```bash
-python qa_cli.py --path [FOLDER]                # Code analysis only (default)
-python qa_cli.py --path [FOLDER] --port [PORT]  # Code analysis + localhost check
+python qa_cli.py --path [FOLDER]                # Quick analysis (default)
+python qa_cli.py --path [FOLDER] --crew         # Full CrewAI analysis with agents
+python qa_cli.py --path [FOLDER] --port [PORT]  # Analysis + localhost check
+python qa_cli.py --path [FOLDER] --crew --port [PORT]  # Full analysis + localhost
 ```
 
 ## 📋 **Common Team Scenarios**

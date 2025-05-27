@@ -9,6 +9,7 @@ import argparse
 import os
 import sys
 from pathlib import Path
+from qa_crew import QACrew
 from demo_qa_crew import run_demo_qa_analysis, demo_localhost_check
 from qa_tools import check_localhost_site
 
@@ -18,20 +19,26 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
+  # Quick analysis (current directory)
+  python qa_cli.py
+  
   # Code analysis only (default)
   python qa_cli.py --path ./frontend --type react
   
+  # Full CrewAI analysis with specialized agents
+  python qa_cli.py --path ./frontend --crew
+  
   # Code analysis + localhost check
   python qa_cli.py --path ./frontend --type react --port 3000
+  
+  # CrewAI analysis + localhost check
+  python qa_cli.py --path ./frontend --crew --port 3000
   
   # Check localhost only
   python qa_cli.py --localhost-only --port 3000
   
   # Multiple ports check
   python qa_cli.py --localhost-only --ports 3000,8000,5000
-  
-  # Current directory analysis
-  python qa_cli.py
         """
     )
     
@@ -80,6 +87,12 @@ Examples:
         '--quick',
         action='store_true',
         help='Quick analysis (faster, less detailed)'
+    )
+    
+    parser.add_argument(
+        '--crew',
+        action='store_true',
+        help='Use full CrewAI implementation with specialized agents (slower but more comprehensive)'
     )
     
     parser.add_argument(
@@ -171,21 +184,34 @@ Examples:
     print("\n🚀 Starting analysis...")
     
     try:
-        report = run_demo_qa_analysis(
-            analysis_path, 
-            args.type, 
-            check_localhost=check_localhost, 
-            port=port or "3000"  # Fallback port for function call
-        )
+        if args.crew:
+            # Use full CrewAI implementation
+            print("🤖 Using CrewAI with specialized agents...")
+            qa_crew = QACrew()
+            result = qa_crew.run_analysis(analysis_path, args.type, port)
+            
+            # Save result if output specified
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    f.write(str(result))
+                print(f"📄 CrewAI report saved to: {args.output}")
+        else:
+            # Use demo/quick analysis
+            report = run_demo_qa_analysis(
+                analysis_path, 
+                args.type, 
+                check_localhost=check_localhost, 
+                port=port or "3000"  # Fallback port for function call
+            )
+            
+            # Save custom output if specified
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    f.write(report)
+                print(f"📄 Demo report saved to: {args.output}")
         
         print("\n✅ ANALYSIS COMPLETE!")
         print("=" * 60)
-        
-        # Save custom output if specified
-        if args.output:
-            with open(args.output, 'w', encoding='utf-8') as f:
-                f.write(report)
-            print(f"📄 Custom report saved to: {args.output}")
         
     except Exception as e:
         print(f"❌ Analysis failed: {e}")

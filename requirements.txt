@@ -1,21 +1,33 @@
-crewai>=0.28.8
-langchain>=0.1.0
-langchain-openai>=0.0.5
-langchain-community==0.0.38
+# Core CrewAI and LangChain dependencies
+crewai>=0.121.0
+langchain>=0.3.25
+langchain-core>=0.3.25
+langchain-experimental>=0.3.4
+langchain-openai>=0.2.0
+langchain-community>=0.3.25
+
+# AI and API dependencies
 openai>=1.13.3,<2.0.0
 python-decouple>=3.8
-duckduckgo-search==5.3.0
-yfinance==0.2.18
+
+# Data processing
 pandas>=2.0.0
-numpy==1.24.3
+numpy>=1.24.3
 requests>=2.31.0
-# QA Crew specific dependencies
-crewai-tools>=0.1.0
 pyyaml>=6.0
+
+# Development and analysis tools
 pathlib2>=2.3.7
 ast-tools>=0.1.0
+
+# Optional: Security scanning tools (for enhanced analysis)
 bandit>=1.7.5
 safety>=2.3.0
 flake8>=6.0.0
-pylint>=2.17.0
+
+# Optional: Search and finance tools (from original project)
+duckduckgo-search==5.3.0
+yfinance==0.2.18
+
+# Optional: Type checking
 mypy>=1.5.0 

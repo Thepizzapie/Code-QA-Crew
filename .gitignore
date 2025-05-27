@@ -42,6 +42,7 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+.pytest/
 
 # Virtual environments
 venv/
@@ -49,6 +50,7 @@ env/
 ENV/
 env.bak/
 venv.bak/
+.venv/
 
 # IDE files
 .vscode/
@@ -69,6 +71,8 @@ Thumbs.db
 # Generated reports
 *_report_*.md
 demo_qa_report_*.md
+qa_analysis_*.md
+reports/
 
 # Logs
 *.log
@@ -77,3 +81,21 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+
+# Test outputs
+test_output/
+test_reports/
+
+# CrewAI specific
+crew_output/
+agent_logs/
+
+# LangChain specific
+.langchain/
+langchain_cache/
+
+# Unrelated project directories
+backend/
+notebooks/
+crew_templates/
+data/

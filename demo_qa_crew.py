@@ -6,6 +6,7 @@ Includes localhost checking and basic QA functionality
 """
 
 import os
+import re
 from decouple import config
 from qa_tools import (
     analyze_code_structure,
@@ -15,6 +16,29 @@ from qa_tools import (
     run_general_qa_tests,
     check_localhost_site
 )
+
+def sanitize_path(path: str) -> str:
+    """Remove personal information from file paths for reports"""
+    
+    # Simple string replacement approach to avoid regex issues
+    path_str = str(path)
+    
+    # Replace specific user path
+    if 'C:\\Users\\adria\\' in path_str:
+        path_str = path_str.replace('C:\\Users\\adria\\', 'C:\\Users\\[USER]\\')
+    
+    # Remove common personal directories
+    path_str = path_str.replace('OneDrive\\Desktop\\', '')
+    path_str = path_str.replace('Documents\\', '')
+    path_str = path_str.replace('Downloads\\', '')
+    
+    # Shorten very long paths
+    if len(path_str) > 60:
+        parts = path_str.split('\\')
+        if len(parts) > 3:
+            path_str = '...\\' + '\\'.join(parts[-2:])
+    
+    return path_str
 
 # Load environment variables
 try:
@@ -43,10 +67,13 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
         print(f"🌐 Will check localhost:{port}")
     print()
     
+    # Sanitize path for report (remove personal info)
+    sanitized_path = sanitize_path(code_path)
+    
     report = f"""# Demo QA Analysis Report
 
 ## Project Information
-- **Path**: {code_path}
+- **Path**: {sanitized_path}
 - **Type**: {project_type}
 - **Analysis Date**: {os.popen('date /t').read().strip() if os.name == 'nt' else 'N/A'}
 
