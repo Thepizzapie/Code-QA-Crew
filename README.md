@@ -1,11 +1,13 @@
 # Code QA Crew
 
-Automated code quality analysis using AI agents. Provides comprehensive code review, security scanning, and quality assessment for Python, React, SQL, and mixed codebases.
+Professional automated code quality analysis system using AI agents. Provides comprehensive code review, security scanning, and quality assessment for Python, React, SQL, and mixed codebases.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![CrewAI](https://img.shields.io/badge/CrewAI-0.121.0-orange.svg)](https://crewai.com)
 [![LangChain](https://img.shields.io/badge/LangChain-0.3.25-blue.svg)](https://langchain.com)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> **For AI Agents**: See `AI_README.md` for agent-specific usage instructions and integration guidelines.
 
 ## Features
 
@@ -13,8 +15,10 @@ Automated code quality analysis using AI agents. Provides comprehensive code rev
 - **Real Analysis Tools**: 11 tools using LangChain for actual code analysis (not mock data)
 - **Quality Scoring**: 1-10 scoring system with actionable recommendations
 - **Security Scanning**: OWASP pattern detection with risk categorization
-- **Multiple Interfaces**: Full CrewAI system, CLI, and standalone demo
+- **Multiple Interfaces**: Simple runner, CLI, demo, and full CrewAI system
 - **Privacy Protection**: Path sanitization in reports
+- **No Port Checking**: Configured to skip localhost checks by default
+- **AI Agent Ready**: Comprehensive documentation for AI agent integration
 
 ## Quick Start
 
@@ -55,19 +59,26 @@ See `OLLAMA_SETUP.md` for detailed setup instructions.
 
 ### Usage
 
-**Quick analysis:**
+**Simple QA Analysis (Recommended):**
 ```bash
-python qa_cli.py --quick --path ./my-project
+python run_qa.py  # Analyzes default project
+# or
+python -c "from run_qa import run_qa_analysis; run_qa_analysis('path/to/project')"
 ```
 
-**Full multi-agent analysis:**
+**CLI Interface:**
 ```bash
-python qa_crew.py --path ./my-project --type python
+python qa_cli.py --path ./my-project --type mixed
 ```
 
-**Standalone demo:**
+**Standalone Demo:**
 ```bash
 python demo_qa_crew.py --path ./my-project --type python
+```
+
+**Full CrewAI System (Advanced):**
+```bash
+python qa_crew.py --path ./my-project --type python
 ```
 
 ## Analysis Tools
@@ -158,36 +169,72 @@ Code-QA-Crew/
 
 ## Examples
 
+### Simple Analysis (Recommended)
+```bash
+# Analyze current project
+python run_qa.py
+
+# Analyze specific project
+python -c "from run_qa import run_qa_analysis; run_qa_analysis('path/to/project')"
+```
+
 ### Python Project
 ```bash
-python qa_crew.py --path ./backend --type python
+python qa_cli.py --path ./backend --type python
 ```
 
 ### React Project
 ```bash
-python qa_crew.py --path ./frontend --type react --port 3000
+python qa_cli.py --path ./frontend --type react
 ```
 
 ### Mixed Project
 ```bash
-python qa_crew.py --path ./fullstack --type mixed
+python qa_cli.py --path ./fullstack --type mixed
 ```
 
 ### Development Workflow
 ```bash
-# Quick check during development
-python qa_cli.py --quick --path ./src
+# Quick analysis during development
+python run_qa.py
 
-# Pre-commit validation
-python qa_crew.py --path ./project --type mixed
+# CLI analysis with specific type
+python qa_cli.py --path ./src --type python
 
-# Localhost-only check
-python qa_cli.py --localhost-only --port 3000
+# Demo analysis (no dependencies on CrewAI)
+python demo_qa_crew.py --path ./project --type mixed
 ```
+
+### Real-World Example
+```bash
+# Analyze YieldWise Data Scrappers project
+python run_qa.py
+# Results: 20,940 files, 79 Python files, 8/10 quality score
+```
+
+## Current Status
+
+✅ **Working Components:**
+- `run_qa.py` - Simple, reliable QA analysis
+- `qa_cli.py` - CLI interface with full functionality
+- `demo_qa_crew.py` - Standalone demo (no CrewAI dependencies)
+- All 11 QA tools working with LangChain
+- OpenAI integration (API key required)
+- Path sanitization and privacy protection
+
+⚠️ **Known Issues:**
+- `qa_crew.py` - CrewAI framework compatibility issues
+- Some security regex patterns need refinement
+- pkg_resources deprecation warnings (non-critical)
+
+🎯 **Recommended Usage:**
+- Use `run_qa.py` for most analysis needs
+- Use `qa_cli.py` for command-line integration
+- Use `demo_qa_crew.py` for environments without CrewAI
 
 ## AI Integration
 
-For Cursor AI integration and automated code validation workflows, see `examples/cursor_integration.md`.
+For AI agents and automated workflows, see `AI_README.md` for comprehensive integration guidelines.
 
 ## Testing
 

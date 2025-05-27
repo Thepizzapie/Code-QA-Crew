@@ -6,8 +6,8 @@ langchain-experimental>=0.3.4
 langchain-openai>=0.2.0
 langchain-community>=0.3.25
 
-# AI and API dependencies
-openai>=1.13.3,<2.0.0
+# AI and API dependencies - Fixed version compatibility
+openai>=1.51.0,<2.0.0
 python-decouple>=3.8
 
 # Data processing
@@ -20,14 +20,18 @@ pyyaml>=6.0
 pathlib2>=2.3.7
 ast-tools>=0.1.0
 
-# Optional: Security scanning tools (for enhanced analysis)
+# Security scanning tools
 bandit>=1.7.5
 safety>=2.3.0
 flake8>=6.0.0
 
-# Optional: Search and finance tools (from original project)
+# Search tools
 duckduckgo-search==5.3.0
 yfinance==0.2.18
 
-# Optional: Type checking
-mypy>=1.5.0 
+# Type checking
+mypy>=1.5.0
+
+# Additional compatibility fixes
+litellm>=1.0.0
+tiktoken>=0.5.0 

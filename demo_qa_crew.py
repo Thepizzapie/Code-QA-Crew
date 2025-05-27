@@ -84,7 +84,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
     # 1. Code Structure Analysis
     print("1️⃣ Analyzing code structure...")
     try:
-        structure_result = analyze_code_structure(code_path)
+        structure_result = analyze_code_structure.invoke({"folder_path": code_path})
         report += f"""### 📁 Code Structure Analysis
 ✅ **Status**: Completed
 {structure_result}
@@ -103,7 +103,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
         print("2️⃣ Checking Python syntax...")
         try:
             if os.path.isfile(code_path) and code_path.endswith('.py'):
-                syntax_result = check_python_syntax(code_path)
+                syntax_result = check_python_syntax.invoke({"code_path": code_path})
             else:
                 # Find Python files in directory
                 python_files = []
@@ -114,7 +114,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
                                 python_files.append(os.path.join(root, file))
                 
                 if python_files:
-                    syntax_result = check_python_syntax(python_files[0])  # Check first Python file
+                    syntax_result = check_python_syntax.invoke({"code_path": python_files[0]})  # Check first Python file
                 else:
                     syntax_result = "No Python files found to analyze"
             
@@ -134,7 +134,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
     # 3. Security Scan
     print("3️⃣ Running security scan...")
     try:
-        security_result = scan_security_vulnerabilities(code_path)
+        security_result = scan_security_vulnerabilities.invoke({"code_path": code_path})
         report += f"""### 🔒 Security Analysis
 ✅ **Status**: Completed
 {security_result}
@@ -151,7 +151,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
     # 4. Package Dependencies
     print("4️⃣ Checking package dependencies...")
     try:
-        deps_result = check_package_dependencies(code_path)
+        deps_result = check_package_dependencies.invoke({"code_path": code_path})
         report += f"""### 📦 Dependencies Analysis
 ✅ **Status**: Completed
 {deps_result}
@@ -168,7 +168,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
     # 5. General QA
     print("5️⃣ Running general QA tests...")
     try:
-        qa_result = run_general_qa_tests(code_path)
+        qa_result = run_general_qa_tests.invoke({"code_path": code_path})
         report += f"""### 🧪 General QA Analysis
 ✅ **Status**: Completed
 {qa_result}
@@ -186,7 +186,7 @@ def run_demo_qa_analysis(code_path: str, project_type: str = "python", check_loc
     if check_localhost:
         print(f"6️⃣ Checking localhost:{port}...")
         try:
-            localhost_result = check_localhost_site(port)
+            localhost_result = check_localhost_site.invoke({"port": port, "path": "/"})
             report += f"""### 🌐 Localhost Site Check
 ✅ **Status**: Completed
 {localhost_result}
@@ -243,7 +243,7 @@ def demo_localhost_check(port: str = "3000"):
     print("=" * 40)
     
     try:
-        result = check_localhost_site(port)
+        result = check_localhost_site.invoke({"port": port, "path": "/"})
         print(result)
         return result
     except Exception as e:
@@ -255,14 +255,10 @@ if __name__ == "__main__":
     print("🚀 DEMO QA CREW - READY FOR TESTING!")
     print("=" * 60)
     
-    # Demo 1: Check localhost site
-    print("\n🌐 DEMO 1: Localhost Check")
-    demo_localhost_check("3000")
-    
-    # Demo 2: Analyze current project
-    print("\n\n🔍 DEMO 2: Project Analysis")
+    # Demo: Analyze current project
+    print("\n🔍 DEMO: Project Analysis")
     current_dir = os.getcwd()
-    run_demo_qa_analysis(current_dir, "python", check_localhost=True, port="3000")
+    run_demo_qa_analysis(current_dir, "python", check_localhost=False, port="3000")
     
     print("\n✅ DEMO COMPLETE!")
     print("🎯 Your QA system is ready for demonstration!") 
