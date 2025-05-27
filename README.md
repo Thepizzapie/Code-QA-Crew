@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎯 Code QA Crew
 
 A comprehensive AI-powered code quality assurance system that analyzes code and validates localhost applications.
@@ -102,3 +103,7 @@ Use the validation prompt in `AGENT_PROMPT_SHORT.md` to ensure all generated cod
 ## 📞 Support
 
 For issues or questions, refer to the `TEAM_GUIDE.md` for detailed troubleshooting and usage examples. 
+=======
+# Code-QA-Crew
+Agent crew for qa testing
+>>>>>>> d0b5c825a963a97ec8c9b73ad3bbd1ecdfaae06c
