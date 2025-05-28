@@ -158,15 +158,13 @@ OLLAMA_MODEL=mistral:7b
 ```
 
 ### Model Parameters
-Create `ollama_config.json` for custom parameters:
+Configure model parameters in your `.env` file:
 
-```json
-{
-  "temperature": 0.1,
-  "top_p": 0.9,
-  "max_tokens": 2048,
-  "stop": ["```", "---"]
-}
+```bash
+# Model behavior settings
+OLLAMA_TEMPERATURE=0.1
+OLLAMA_TOP_P=0.9
+OLLAMA_MAX_TOKENS=2048
 ```
 
 ## 🚨 Troubleshooting

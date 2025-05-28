@@ -1,0 +1,265 @@
+architecture_analysis:
+  description: >
+    Conduct comprehensive architectural analysis of the codebase at {code_path}.
+    
+    Use the analyze_code_structure tool to examine project organization, file distribution, and complexity metrics.
+    Research best practices for the detected technologies using research_best_practices tool.
+    
+    Focus on:
+    - Overall system architecture and design patterns
+    - Code organization and modularity
+    - Scalability and maintainability concerns
+    - Algorithmic complexity and performance implications
+    - Adherence to software engineering principles (SOLID, DRY, etc.)
+    
+    Provide academic-level insights with specific recommendations for architectural improvements.
+    Include complexity scores and suggest refactoring strategies where needed.
+  expected_output: >
+    Detailed architectural analysis report with:
+    - System architecture overview and design pattern identification
+    - Code complexity metrics and distribution analysis
+    - Scalability and performance assessment
+    - Specific recommendations for architectural improvements
+    - Academic insights on software engineering principles
+    - Actionable refactoring suggestions with priority levels
+
+python_deep_analysis:
+  description: >
+    Perform comprehensive Python-specific analysis of the codebase at {code_path}.
+    
+    Use the advanced_python_analysis tool for deep AST parsing and metrics collection.
+    Use security_vulnerability_scan to identify Python-specific security issues.
+    Research Python best practices using research_best_practices tool for any identified issues.
+    
+    Focus on:
+    - Syntax validation and PEP compliance
+    - Code complexity and maintainability metrics
+    - Performance optimization opportunities
+    - Security vulnerabilities and anti-patterns
+    - Testing coverage and documentation quality
+    - Framework-specific best practices (Django, Flask, FastAPI)
+    
+    Provide Python expert-level recommendations with specific code examples.
+  expected_output: >
+    Comprehensive Python analysis report with:
+    - Syntax and style compliance assessment
+    - Detailed complexity metrics and hotspot identification
+    - Security vulnerability analysis with remediation steps
+    - Performance optimization recommendations
+    - Testing and documentation coverage analysis
+    - Framework-specific best practices and improvements
+    - Code quality score with specific improvement actions
+
+swift_ios_analysis:
+  description: >
+    Analyze Swift/SwiftUI codebase at {code_path} for iOS/macOS development best practices, performance, and modern Swift patterns.
+    
+    Use the swift_swiftui_analysis tool for comprehensive Swift code analysis.
+    Use security_vulnerability_scan to identify iOS-specific security issues.
+    Research Swift best practices using research_best_practices tool for identified issues.
+    
+    Focus on:
+    - Swift syntax and modern language features (async/await, Combine)
+    - SwiftUI declarative patterns and state management
+    - Memory management and ARC optimization
+    - Performance optimization for mobile devices
+    - Architecture patterns (MVVM, VIPER, Coordinator)
+    - iOS/macOS platform-specific best practices
+    - App Store guidelines compliance
+    - Accessibility and localization considerations
+    
+    Provide Swift expert-level insights with iOS development best practices.
+  expected_output: >
+    Comprehensive Swift/iOS analysis report with:
+    - Swift language usage and modern feature adoption
+    - SwiftUI architecture and state management assessment
+    - Memory management and performance optimization recommendations
+    - iOS/macOS platform-specific improvements
+    - Architecture pattern evaluation and suggestions
+    - Security and privacy compliance analysis
+    - App Store readiness assessment
+    - Accessibility and user experience recommendations
+
+react_performance_analysis:
+  description: >
+    Analyze React/Frontend codebase at {code_path} for performance, accessibility, and modern patterns.
+    
+    Use the react_performance_analysis tool for comprehensive frontend analysis.
+    Research React best practices using research_best_practices tool for identified issues.
+    Check localhost site if port is provided using check_localhost_site tool.
+    
+    Focus on:
+    - Component architecture and hook usage patterns
+    - Performance optimization opportunities
+    - Accessibility compliance and improvements
+    - Modern React patterns and best practices
+    - Bundle size and optimization strategies
+    - Testing strategies and coverage
+    
+    Provide React expert-level insights with performance metrics and accessibility guidelines.
+  expected_output: >
+    Detailed React analysis report with:
+    - Component architecture assessment and recommendations
+    - Performance optimization strategies with specific examples
+    - Accessibility audit with WCAG compliance notes
+    - Modern pattern adoption analysis
+    - Bundle optimization recommendations
+    - Testing strategy improvements
+    - Live site analysis if localhost is available
+
+database_security_analysis:
+  description: >
+    Analyze database-related code and SQL queries at {code_path} for security and performance.
+    
+    Use security_vulnerability_scan to identify SQL injection risks and database security issues.
+    Research database best practices using research_best_practices tool.
+    
+    Focus on:
+    - SQL injection vulnerability detection
+    - Query performance and optimization opportunities
+    - Database schema design patterns
+    - Index usage and optimization strategies
+    - Data validation and sanitization
+    - Connection security and authentication
+    
+    Provide database expert recommendations with security-first approach.
+  expected_output: >
+    Database security and performance report with:
+    - SQL injection vulnerability assessment
+    - Query optimization recommendations
+    - Schema design evaluation
+    - Security best practices implementation
+    - Performance tuning suggestions
+    - Data protection and compliance notes
+
+devops_infrastructure_analysis:
+  description: >
+    Analyze DevOps and infrastructure configurations at {code_path}.
+    
+    Use dependency_vulnerability_check to assess package security.
+    Research DevOps best practices using research_best_practices tool.
+    Check localhost deployment if port is provided.
+    
+    Focus on:
+    - Deployment configuration analysis
+    - Container and orchestration setup
+    - CI/CD pipeline assessment
+    - Infrastructure as code evaluation
+    - Monitoring and logging setup
+    - Security and compliance considerations
+    
+    Provide DevOps expert insights with deployment and scalability recommendations.
+  expected_output: >
+    DevOps infrastructure analysis with:
+    - Deployment strategy assessment
+    - Container optimization recommendations
+    - CI/CD pipeline improvements
+    - Infrastructure security evaluation
+    - Monitoring and observability setup
+    - Scalability and reliability recommendations
+
+dependency_security_audit:
+  description: >
+    Conduct comprehensive dependency security audit of the project at {code_path}.
+    
+    Use dependency_vulnerability_check to analyze all package dependencies.
+    Research security best practices for identified vulnerable packages.
+    
+    Focus on:
+    - Known vulnerability detection in dependencies
+    - Outdated package identification
+    - License compliance assessment
+    - Supply chain security evaluation
+    - Version compatibility analysis
+    - Security advisory monitoring
+    
+    Provide actionable security recommendations with priority levels.
+  expected_output: >
+    Dependency security audit report with:
+    - Vulnerability assessment with risk levels
+    - Outdated package identification and update recommendations
+    - License compliance analysis
+    - Supply chain security evaluation
+    - Automated security monitoring setup recommendations
+    - Prioritized remediation action plan
+
+comprehensive_security_scan:
+  description: >
+    Perform comprehensive security analysis of the entire codebase at {code_path}.
+    
+    Use security_vulnerability_scan for pattern-based vulnerability detection.
+    Research security best practices for identified issues.
+    
+    Focus on:
+    - OWASP Top 10 vulnerability assessment
+    - Code injection and XSS prevention
+    - Authentication and authorization flaws
+    - Data exposure and privacy risks
+    - Cryptographic implementation review
+    - Input validation and sanitization
+    
+    Provide cybersecurity expert analysis with detailed remediation guidance.
+  expected_output: >
+    Comprehensive security assessment with:
+    - OWASP Top 10 vulnerability analysis
+    - Risk-categorized security findings
+    - Detailed remediation instructions
+    - Security best practices implementation guide
+    - Compliance framework alignment
+    - Security monitoring and testing recommendations
+
+documentation_quality_analysis:
+  description: >
+    Analyze documentation quality, completeness, and accessibility for the project at {code_path}.
+    
+    Use analyze_documentation_quality tool to assess all documentation aspects.
+    Research documentation best practices using research_best_practices tool for identified gaps.
+    
+    Focus on:
+    - README file quality and completeness
+    - Code documentation and docstring coverage
+    - API documentation availability and quality
+    - Setup and installation instructions
+    - User guides and tutorials
+    - Code comments and inline documentation
+    - Documentation accessibility and organization
+    - Version control and maintenance practices
+    
+    Provide technical writing expert recommendations with specific improvement strategies.
+  expected_output: >
+    Comprehensive documentation analysis with:
+    - Documentation quality score and coverage assessment
+    - README and setup instruction evaluation
+    - Code documentation coverage analysis
+    - API documentation completeness review
+    - User experience and accessibility assessment
+    - Documentation maintenance and versioning recommendations
+    - Specific improvement strategies with templates
+    - Documentation tooling and automation suggestions
+
+final_qa_synthesis:
+  description: >
+    Synthesize all analysis findings into a comprehensive QA report for {code_path}.
+    
+    If localhost_port is provided, use check_localhost_site to verify live application.
+    Research overall quality assurance best practices.
+    
+    Integrate findings from:
+    - Architecture and design analysis
+    - Language-specific code quality
+    - Security vulnerability assessment
+    - Performance and optimization opportunities
+    - Infrastructure and deployment readiness
+    - Testing and documentation coverage
+    
+    Provide final quality score (1-10) with detailed justification and prioritized action plan.
+  expected_output: >
+    Executive QA summary report with:
+    - Overall quality score (1-10) with detailed justification
+    - Critical issues requiring immediate attention
+    - Performance and security risk assessment
+    - Production readiness evaluation
+    - Prioritized improvement roadmap
+    - Testing strategy recommendations
+    - Live application analysis (if applicable)
+    - Executive summary for stakeholders 
